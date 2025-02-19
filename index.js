@@ -5,18 +5,19 @@ require('axios')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+const process=require("process")
+require('dotenv').config();
 const cors=require('cors')
-const port =process.env.PORT || 3001
+const port =process.env.PORT 
 const {Client}=require('pg')
-const url=process.env.DBURL ||`postgresql://studying_user:018LLQEojT6Ru9ue7e1ci9B94Y023Iyx@dpg-cuq88h9opnds73ej2ttg-a.frankfurt-postgres.render.com/studying`
+const url=process.env.DBURL 
 const client = new Client({
     connectionString: url,
     ssl: {
       rejectUnauthorized: false, // تجاوز فحص الشهادات (مناسب للتطوير فقط)
     },
   });
-//app.use(cors())
+app.use(cors())
  //route
 app.get('/',homehandler)
 app.post('/saver',saverhandler)
